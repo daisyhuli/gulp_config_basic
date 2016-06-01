@@ -5,3 +5,11 @@ body {
 li {
   line-height: 120px;
 }
+
+div {
+  background: -webkit-gradient(linear, right top, left top, from(#80c1e7), to(#213c7c));
+  background: linear-gradient(to left, #80c1e7, #213c7c);
+  -webkit-transform: scale(1.5);
+      -ms-transform: scale(1.5);
+          transform: scale(1.5);
+}

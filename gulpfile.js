@@ -12,6 +12,7 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     del = require('del');
     rev = require('gulp-rev-append'); //给页面的引用添加版本号，清除页面引用缓存
+    plumber = require('gulp-plumber'); //处理所有错误的通用方法,不会退出gulp
 
 // HTML处理
 gulp.task('html', function() {
@@ -23,8 +24,13 @@ gulp.task('html', function() {
 
 // Styles
 gulp.task('styles', function() {
-    return sass('src/styles/*.scss', { style: 'expanded' })
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
+    return sass('src/styles/*.scss', { style: 'expanded'})
+        .pipe(plumber())
+        .pipe(autoprefixer({
+            browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'],
+            cascade: true,
+            remove:true
+        }))
         .pipe(gulp.dest('dist/styles'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(cssnano())
@@ -55,7 +61,7 @@ gulp.task('images', function() {
 
 // Clean
 gulp.task('clean', function() {
-    return del(['dist/styles', 'dist/scripts', 'dist/images']);
+    return del(['dist/','dist/styles', 'dist/scripts', 'dist/images']);
 });
 
 // Default task

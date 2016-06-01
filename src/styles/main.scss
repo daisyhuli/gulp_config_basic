@@ -4,3 +4,9 @@ body{
 li{
     line-height: 120px;
 }
+
+div{
+    //transform: rotate(90deg);
+    background: linear-gradient(to left, #80c1e7, #213c7c);
+    transform: scale(1.5);
+}
